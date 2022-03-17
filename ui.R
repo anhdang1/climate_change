@@ -23,7 +23,7 @@ intro_tab <- tabPanel(
   )
 )
 
-rboke_sidebar <- sidebarPanel(
+plot_sidebar <- sidebarPanel(
   selectInput(
     inputId = "user_category",
     label = "Select Country",
@@ -34,47 +34,24 @@ rboke_sidebar <- sidebarPanel(
               min = count_range[1],
               max = count_range[2],
               value = count_range,
-              step = 1)
+              step = 1,
+              sep = '')
 )
 
- 
-# plot_sidebar <- sidebarPanel(
-#   sliderInput("year", "Choose year range:",
-#               min = count_range[1],
-#               max = count_range[2],
-#               value = count_range,
-#               step = 1)
-# )
-#                 
 
-             
-       
-# plot_main <- mainPanel(
-#   plotlyOutput(outputId = "co2_comsumption", width = "100%", height = "auto"),
-#   textOutput("Text02")
-# )
 
-rboke_main <- mainPanel(
+plot_main <- mainPanel(
   textOutput("Text03"),
-  rbokehOutput(outputId = "climatePlot", width = "100%", height = "auto")
+  plotlyOutput(outputId = "climatePlot")
 )
+
 
 
 plot_tab <- tabPanel(
-  "Envisioning Card",
-  p("Welcome to the envisioning tab"),
-  mainPanel(
-    textOutput("Text04"),
-    textOutput("Text05")
-  )
-)
-
-
-rboke_tab <- tabPanel(
   "Country Oil Consumption",
   sidebarLayout(
-    rboke_sidebar,
-    rboke_main
+    plot_sidebar,
+    plot_main
   )
 )
 
@@ -83,6 +60,5 @@ rboke_tab <- tabPanel(
 ui <- navbarPage(
   "Climate Change",
   intro_tab,
-  rboke_tab,
-  plot_tab
+  plot_tab,
 )
